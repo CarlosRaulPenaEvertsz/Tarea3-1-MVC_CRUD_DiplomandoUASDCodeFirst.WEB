@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_CRUD_DiplomandoUASDCodeFirst.WEB", "MVC_CRUD_DiplomandoUASDCodeFirst.WEB\MVC_CRUD_DiplomandoUASDCodeFirst.WEB.csproj", "{53299108-9EA4-4235-9A27-6592B6109116}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_CRUD_DiplomandoUASDCodeFirst.Model", "MVC_CRUD_DiplomandoUASDCodeFirst.Model\MVC_CRUD_DiplomandoUASDCodeFirst.Model.csproj", "{248B0B78-155F-4CE4-872B-5F1BEF1BB985}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53299108-9EA4-4235-9A27-6592B6109116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53299108-9EA4-4235-9A27-6592B6109116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53299108-9EA4-4235-9A27-6592B6109116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53299108-9EA4-4235-9A27-6592B6109116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248B0B78-155F-4CE4-872B-5F1BEF1BB985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248B0B78-155F-4CE4-872B-5F1BEF1BB985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248B0B78-155F-4CE4-872B-5F1BEF1BB985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248B0B78-155F-4CE4-872B-5F1BEF1BB985}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FF1E1C3-8AAA-437D-BEA0-BE16B8D766AD}
+	EndGlobalSection
+EndGlobal
