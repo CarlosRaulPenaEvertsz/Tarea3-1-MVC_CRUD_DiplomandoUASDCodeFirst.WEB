@@ -16,7 +16,7 @@ namespace MVC_CRUD_DiplomandoUASDCodeFirst.WEB.Controllers
         private EmpleadoContext db = new EmpleadoContext();
 
         // GET: Departamentos
-        public ActionResult Index()
+        public ActionResult Index() 
         {
             return View(db.Departamentos.ToList());
         }
