@@ -23,23 +23,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellidos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_Ingreso)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmpleadoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmpleadoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmpleadoID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_Ingreso)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EmpleadoID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EmpleadoID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EmpleadoID })
+            </td>
+        </tr>
+    }
 
 </table>
+@Html.ActionLink("Exportar a Excell Tabla con los Primeros 3 Empleados", "ExportarEmpleadosCSV")
+<br />
+@Html.ActionLink("Exportar a Excell Tabla con los Primeros 20 Empleados", "ExportarEmpleadosCSV20")
+<br />
+@Html.ActionLink("Exportar a Excell Tabla con los Empleados Cuyos Nombres Comienzan con J", "ExportarEmpleadosCSVInitJ")
+<br />
+@Html.ActionLink("Exportar a Excell Tabla con los Empleados Cuyos Apellidos Contienen A", "ExportarEmpleadosCSVwithA")

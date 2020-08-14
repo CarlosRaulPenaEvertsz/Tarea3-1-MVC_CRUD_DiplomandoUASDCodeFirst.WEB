@@ -8,11 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_CRUD_DiplomandoUASDCodeFirst.Model.DAL;
 using MVC_CRUD_DiplomandoUASDCodeFirst.Model.Models;
+using System.Data.SqlClient;
+using ClosedXML.Excel;
+using System.IO;
+using System.Xml;
 
 namespace MVC_CRUD_DiplomandoUASDCodeFirst.WEB.Controllers
 {
     public class EmpleadosController : Controller
     {
+
+        // Inicio
         private EmpleadoContext db = new EmpleadoContext();
 
         // GET: Empleadoes
@@ -114,6 +120,131 @@ namespace MVC_CRUD_DiplomandoUASDCodeFirst.WEB.Controllers
             db.Empleados.Remove(empleado);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        //Para los primeros 3 Registros de la Tabla
+
+        public FileResult ExportarEmpleadosCSV()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] {
+                new DataColumn("Codigo"),
+                new DataColumn("Nombres"),
+                new DataColumn("Apellidos"),
+                new DataColumn("Fecha_Ingreso")
+            });
+
+            // Tomamos los primeros 3 Registros
+            var CurEmpleados = from empleados in db.Empleados.Take(3)
+                               select empleados; 
+            foreach (var Empleado in CurEmpleados)
+            {
+                dt.Rows.Add(Empleado.EmpleadoID, Empleado.Nombres, Empleado.Apellidos, Empleado.Fecha_Ingreso);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook()) 
+            {
+                wb.Worksheets.Add(dt);
+                using (System.IO.MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Primeros3Empleados.xlsx");
+                }
+            }
+        }
+
+        //Para los primeros 20 Registros de la Tabla
+
+        public FileResult ExportarEmpleadosCSV20()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] {
+                new DataColumn("Codigo"),
+                new DataColumn("Nombres"),
+                new DataColumn("Apellidos"),
+                new DataColumn("Fecha_Ingreso")
+            });
+
+            // Tomamos los primeros 20 Registros
+            var CurEmpleados = from empleados in db.Empleados.Take(20)
+                               select empleados;
+            foreach (var Empleado in CurEmpleados)
+            {
+                dt.Rows.Add(Empleado.EmpleadoID, Empleado.Nombres, Empleado.Apellidos, Empleado.Fecha_Ingreso);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (System.IO.MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Primeros20Empleados.xlsx");
+                }
+            }
+        }
+
+        //Para todos los Empleados que su nombre Inicia con J
+
+        public FileResult ExportarEmpleadosCSVInitJ()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] {
+                new DataColumn("Codigo"),
+                new DataColumn("Nombres"),
+                new DataColumn("Apellidos"),
+                new DataColumn("Fecha_Ingreso")
+            });
+
+            var CurEmpleados = from empleados in db.Empleados
+                               where empleados.Nombres.StartsWith("J") || empleados.Nombres.StartsWith("j")
+                               select empleados ;
+            foreach (var Empleado in CurEmpleados)
+            {
+                dt.Rows.Add(Empleado.EmpleadoID, Empleado.Nombres, Empleado.Apellidos, Empleado.Fecha_Ingreso);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (System.IO.MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EmpleadosNombreEmpiezanJ.xlsx");
+                }
+            }
+        }
+
+        //Para todos los Empleados que su Apellido Contenga "A"
+
+        public FileResult ExportarEmpleadosCSVwithA()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] {
+                new DataColumn("Codigo"),
+                new DataColumn("Nombres"),
+                new DataColumn("Apellidos"),
+                new DataColumn("Fecha_Ingreso")
+            });
+
+            var CurEmpleados = from empleados in db.Empleados
+                               where empleados.Apellidos.Contains("a") || empleados.Apellidos.Contains("A")
+                               select empleados;
+            foreach (var Empleado in CurEmpleados)
+            {
+                dt.Rows.Add(Empleado.EmpleadoID, Empleado.Nombres, Empleado.Apellidos, Empleado.Fecha_Ingreso);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (System.IO.MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EmpleadosApellidosConA.xlsx");
+                }
+            }
         }
 
         protected override void Dispose(bool disposing)
